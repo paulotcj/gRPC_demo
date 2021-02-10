@@ -23,20 +23,23 @@ namespace GrpcClient
 
             var clientRequested = new CustomerLookupModel { UserId = 2 };
 
+            Console.WriteLine("____________________________________");
+            Console.WriteLine("Requesting Customer where UserId = 2 and no delay:");
             var customer = await customerClient.GetCustomerInfoAsync(clientRequested);
-            Console.WriteLine($"{customer.FirstName} {customer.LastName}");
-
-            Console.WriteLine("\n\nNew Customer List:");
+            Console.WriteLine($"    {customer.FirstName} {customer.LastName}");
+            Console.WriteLine("\n" + "____________________________________");
+            Console.WriteLine("Customer list stream - 1800ms delay per record:");
 
             using (var call = customerClient.GetNewCustomer(new NewCustomerRequest())) //NewCustomerRequest is a empty request
             {
                 while (await call.ResponseStream.MoveNext()) {
                     var currentCustomer = call.ResponseStream.Current;
 
-                    Console.WriteLine($"{currentCustomer.FirstName} {currentCustomer.LastName} : {currentCustomer.EmailAddress}");
+                    Console.WriteLine($"    {currentCustomer.FirstName} {currentCustomer.LastName} : {currentCustomer.EmailAddress}");
                 }
             }
 
+            Console.WriteLine("\n"+"____________________________________" + "\nDone");
             Console.ReadLine();
         }
     }

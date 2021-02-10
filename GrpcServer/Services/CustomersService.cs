@@ -21,16 +21,16 @@ namespace GrpcServer.Services
         {
             CustomerModel output = new CustomerModel();
             if (request.UserId == 1) {
-                output.FirstName = "Jamie";
-                output.LastName = "Smith";
+                output.FirstName = "Elsa";
+                output.LastName = "Bradshaw";
             }
             else if (request.UserId == 2) {
-                output.FirstName = "Jane";
-                output.LastName = "Doe";
+                output.FirstName = "Jermaine";
+                output.LastName = "Myers";
             }
             else {
-                output.FirstName = "Greg";
-                output.LastName = "Thomas";
+                output.FirstName = "Aaron";
+                output.LastName = "Valencia";
             }
 
             return Task.FromResult(output);
@@ -42,31 +42,31 @@ namespace GrpcServer.Services
             List<CustomerModel> customers = new List<CustomerModel>
             {
                 new CustomerModel {
-                    FirstName = "Tim",
-                    LastName = "Corey",
-                    EmailAddress = "tim@iamtimcorey.com",
-                    Age = 41,
+                    FirstName = "Tyreese",
+                    LastName = "Mcmanus",
+                    EmailAddress = "tyreese@mcmanus.com",
+                    Age = 45,
                     IsAlive = true
                 },
                 new CustomerModel {
-                    FirstName = "Sue",
-                    LastName = "Storm",
-                    EmailAddress = "sue@stormy.net",
-                    Age = 28,
+                    FirstName = "Anoushka",
+                    LastName = "Cohen",
+                    EmailAddress = "anoushka@cohen.net",
+                    Age = 39,
                     IsAlive = true
                 },
                 new CustomerModel {
-                    FirstName = "Bilbo",
-                    LastName = "Baggins",
-                    EmailAddress = "bilbo@middleearth.net",
-                    Age = 117,
+                    FirstName = "Calum",
+                    LastName = "Chung",
+                    EmailAddress = "calum@chung.net",
+                    Age = 24,
                     IsAlive = true
                 },
             };
 
             foreach (var cust in customers)
             {
-                await Task.Delay(1000);
+                await Task.Delay(1800);
                 await responseStream.WriteAsync(cust);
             }
         }
